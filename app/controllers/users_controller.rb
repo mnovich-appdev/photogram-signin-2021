@@ -1,7 +1,33 @@
 class UsersController < ApplicationController
-  def new_registration_form
-    
+  def sign_up
     render({:template => "users/signup_form.html.erb"})
+  end
+
+  def sign_in
+    render({:template => "users/signin_form.html.erb"})
+  end
+
+  def sign_out
+    reset_session
+
+    redirect_to("/", {:notice => "Goodbye!"})
+  end
+
+  def authenticate
+    user = params.fetch("input_username")
+    password = params.fetch("input_password")
+
+    matching_user = User.where({:username => user}).at(0)
+
+    if matching_user == nil
+      redirect_to("/user_sign_in", {:alert => "Username not found"})
+    elsif matching_user.authenticate(password)
+      session.store(:user_id, matching_user.id)
+      
+      redirect_to("/", {:notice => "Welcome, "+matching_user.username+"!"})
+    else
+      redirect_to("/user_sign_in", {:alert => "Password not found"})
+    end
   end
   
   def index

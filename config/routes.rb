@@ -17,11 +17,11 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
 
-  # SIGN UP
-  get("/user_sign_up", {:controller => "users", :action => "new_registration_form"})
-
-  # SIGN IN
-  get("/user_sign_in", {:controller => "users", :action => })
+  # SIGN IN / UP / OUT
+  get("/user_sign_up", {:controller => "users", :action => "sign_up"})
+  get("/user_sign_in", {:controller => "users", :action => "sign_in"})
+  get("/user_sign_out", {:controller => "users", :action => "sign_out"})
+  post("/verify_credentials", {:controller => "users", :action => "authenticate"})
 
   # Photo routes
 
