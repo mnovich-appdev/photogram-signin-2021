@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # SIGN UP
   get("/user_sign_up", {:controller => "users", :action => "new_registration_form"})
 
+  # SIGN IN
+  get("/user_sign_in", {:controller => "users", :action => })
+
   # Photo routes
 
   # CREATE
